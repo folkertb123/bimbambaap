@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Woordspel</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-    #letter { font-size: 40px; margin-bottom: 20px; }
-    #categorie { font-size: 30px; margin-bottom: 10px; }
-    #timer { font-size: 48px; margin: 20px; }
-    button { padding: 15px 30px; font-size: 20px; }
-    #melding { font-size: 24px; color: red; margin-top: 20px; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s ease-in-out;
+      color: white;
+      -webkit-text-stroke: 1px black; /* zwarte omkadering voor tekst */
+      text-stroke: 1px black;
+    }
+    #letter {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    #categorie {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+    #timer {
+      font-size: 48px;
+      margin: 20px;
+    }
+    #melding {
+      font-size: 24px;
+      margin-top: 20px;
+      color: white;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 20px;
+      background-color: rgba(0,0,0,0.6);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: white;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
+    }
   </style>
 </head>
 <body>
@@ -31,6 +73,13 @@
       "Iets goedkoper dan 5 euro"
     ];
 
+    // Foto's automatisch toevoegen image00001.jpeg t/m image00037.jpeg
+    const fotos = [];
+    for (let i = 1; i <= 37; i++) {
+      const nummer = i.toString().padStart(5, '0');
+      fotos.push(`images/image${nummer}.jpeg`);
+    }
+
     let beschikbareCategorieën = [...ALLE_CATEGORIEN];
     let huidigSpel = null;
     let spelTeller = 0;
@@ -43,6 +92,11 @@
     function randomLetter() {
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    function randomFoto() {
+      const index = Math.floor(Math.random() * fotos.length);
+      document.body.style.backgroundImage = `url('${fotos[index]}')`;
     }
 
     function startTimer() {
@@ -63,7 +117,7 @@
 
     function volgendeVraag() {
       if (eersteVraag) {
-        document.getElementById("letter").innerText = ""; // verberg letter na eerste druk
+        document.getElementById("letter").innerText = "";
         eersteVraag = false;
       }
 
@@ -101,13 +155,14 @@
       }
 
       document.getElementById("categorie").innerText = gekozenCategorie;
+      randomFoto();
       startTimer();
     }
 
-    // Laat de beginletter meteen zien bij laden van de pagina
     window.onload = () => {
       const letter = randomLetter();
       document.getElementById("letter").innerText = "Beginletter: " + letter;
+      randomFoto();
     };
   </script>
 </body>
