@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Woordspel</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+    #letter { font-size: 40px; margin-bottom: 20px; }
+    #categorie { font-size: 30px; margin-bottom: 10px; }
+    #timer { font-size: 48px; margin: 20px; }
+    button { padding: 15px 30px; font-size: 20px; }
+    #melding { font-size: 24px; color: red; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+  <div id="letter"></div>
+  <div id="categorie"></div>
+  <div id="timer"></div>
+  <div id="melding"></div>
+  <button onclick="volgendeVraag()">Volgende vraag</button>
+
+  <script>
+    const ALLE_CATEGORIEN = [
+      "Landenspel", "Dierenspel", "Merkenspel",
+      "Bekende nederlander", "Kleur", "Eten", "Drinken",
+      "Iets uit Carca of Catan", "Iets uit de coffeeshop",
+      "Locatie in Leeuwarden", "Gratis dubbel pof",
+      "Een spel, geen game", "Iets hoogs", "Iets kleiner dan Timo",
+      "Een dorp in Nederland", "Een film of serie", "Een lichaamsdeel",
+      "Iets goedkoper dan 5 euro"
+    ];
+
+    let beschikbareCategorieën = [...ALLE_CATEGORIEN];
+    let huidigSpel = null;
+    let spelTeller = 0;
+    let gratisDubbelPofGebruikt = false;
+    let eersteVraag = true;
+
+    let timer;
+    let tijd = 30;
+
+    function randomLetter() {
+      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      tijd = 30;
+      document.getElementById("timer").innerText = tijd;
+      document.getElementById("melding").innerText = "";
+
+      timer = setInterval(() => {
+        tijd--;
+        document.getElementById("timer").innerText = tijd;
+        if (tijd <= 0) {
+          clearInterval(timer);
+          document.getElementById("melding").innerText = "Je gaat jilla";
+        }
+      }, 1000);
+    }
+
+    function volgendeVraag() {
+      if (eersteVraag) {
+        document.getElementById("letter").innerText = ""; // verberg letter na eerste druk
+        eersteVraag = false;
+      }
+
+      let gekozenCategorie;
+
+      if (huidigSpel && spelTeller < 5) {
+        spelTeller++;
+        gekozenCategorie = `${huidigSpel} ${spelTeller}`;
+      } else {
+        huidigSpel = null;
+        spelTeller = 0;
+
+        if (beschikbareCategorieën.length === 0) {
+          beschikbareCategorieën = [...ALLE_CATEGORIEN];
+          if (gratisDubbelPofGebruikt) {
+            beschikbareCategorieën = beschikbareCategorieën.filter(c => c !== "Gratis dubbel pof");
+          }
+        }
+
+        let randomIndex = Math.floor(Math.random() * beschikbareCategorieën.length);
+        let categorie = beschikbareCategorieën[randomIndex];
+        beschikbareCategorieën.splice(randomIndex, 1);
+
+        if (categorie === "Gratis dubbel pof") {
+          gratisDubbelPofGebruikt = true;
+        }
+
+        if (categorie.endsWith("spel")) {
+          huidigSpel = categorie;
+          spelTeller = 1;
+          gekozenCategorie = `${huidigSpel} ${spelTeller}`;
+        } else {
+          gekozenCategorie = categorie;
+        }
+      }
+
+      document.getElementById("categorie").innerText = gekozenCategorie;
+      startTimer();
+    }
+
+    // Laat de beginletter meteen zien bij laden van de pagina
+    window.onload = () => {
+      const letter = randomLetter();
+      document.getElementById("letter").innerText = "Beginletter: " + letter;
+    };
+  </script>
+</body>
+</html>
