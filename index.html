@@ -18,8 +18,17 @@
       background-repeat: no-repeat;
       transition: background-image 0.5s ease-in-out;
       color: white;
-      -webkit-text-stroke: 2px black; /* dikkere omkadering */
-      text-stroke: 2px black;
+      /* Verwijder text-stroke en -webkit-text-stroke */
+      /* Voeg dikke zwarte outline met text-shadow */
+      text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black,
+        0 -2px 0 black,
+        0 2px 0 black,
+        -2px 0 0 black,
+        2px 0 0 black;
     }
     #letter {
       font-size: 1.6rem; /* 29px */
@@ -37,8 +46,15 @@
       font-size: 1.2rem; /* 22px */
       margin-top: 20px;
       color: white;
-      -webkit-text-stroke: 2px black; /* dikkere omkadering */
-      text-stroke: 2px black;
+      text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black,
+        0 -2px 0 black,
+        0 2px 0 black,
+        -2px 0 0 black,
+        2px 0 0 black;
     }
     button {
       padding: 12px 25px;
@@ -48,8 +64,15 @@
       border-radius: 8px;
       cursor: pointer;
       color: white;
-      -webkit-text-stroke: 2px black; /* dikkere omkadering */
-      text-stroke: 2px black;
+      text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black,
+        0 -2px 0 black,
+        0 2px 0 black,
+        -2px 0 0 black,
+        2px 0 0 black;
     }
   </style>
 </head>
@@ -87,7 +110,6 @@
     let timer;
     let tijd = 30;
 
-    // Foto-rotatie zonder herhaling
     let overgeblevenFotos = [...fotos];
 
     function randomLetter() {
@@ -115,63 +137,4 @@
         tijd--;
         document.getElementById("timer").innerText = tijd;
         if (tijd <= 0) {
-          clearInterval(timer);
-          document.getElementById("melding").innerText = "Je gaat jilla";
-        }
-      }, 1000);
-    }
-
-    function volgendeVraag() {
-      if (eersteVraag) {
-        document.getElementById("letter").innerText = "";
-        eersteVraag = false;
-      }
-
-      let gekozenCategorie;
-
-      if (huidigSpel && spelTeller < 5) {
-        spelTeller++;
-        gekozenCategorie = `${huidigSpel} ${spelTeller}`;
-      } else {
-        huidigSpel = null;
-        spelTeller = 0;
-
-        if (beschikbareCategorieën.length === 0) {
-          beschikbareCategorieën = [...ALLE_CATEGORIEN];
-          if (gratisDubbelPofGebruikt) {
-            beschikbareCategorieën = beschikbareCategorieën.filter(c => c !== "Gratis dubbel pof");
-          }
-        }
-
-        let randomIndex = Math.floor(Math.random() * beschikbareCategorieën.length);
-        let categorie = beschikbareCategorieën[randomIndex];
-        beschikbareCategorieën.splice(randomIndex, 1);
-
-        if (categorie === "Gratis dubbel pof") {
-          gratisDubbelPofGebruikt = true;
-        }
-
-        if (categorie.endsWith("spel")) {
-          huidigSpel = categorie;
-          spelTeller = 1;
-          gekozenCategorie = `${huidigSpel} ${spelTeller}`;
-        } else {
-          gekozenCategorie = categorie;
-        }
-      }
-
-      document.getElementById("categorie").innerText = gekozenCategorie;
-
-      randomFoto();
-
-      startTimer();
-    }
-
-    window.onload = () => {
-      const letter = randomLetter();
-      document.getElementById("letter").innerText = "Beginletter: " + letter;
-      randomFoto();
-    };
-  </script>
-</body>
-</html>
+          clearInterval(timer
