@@ -18,25 +18,26 @@
       background-repeat: no-repeat;
       transition: background-image 0.5s ease-in-out;
       color: white;
-      /* Verwijder text-stroke en -webkit-text-stroke */
-      /* Voeg dikke zwarte outline met text-shadow */
-      text-shadow:
-        -2px -2px 0 black,
-        2px -2px 0 black,
-        -2px 2px 0 black,
-        2px 2px 0 black,
-        0 -2px 0 black,
-        0 2px 0 black,
-        -2px 0 0 black,
-        2px 0 0 black;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
     }
     #letter {
       font-size: 1.6rem; /* 29px */
       margin-bottom: 20px;
     }
+    /* Dikkere zwarte rand om categorie via text-shadow */
     #categorie {
       font-size: 1.4rem; /* 25px */
       margin-bottom: 12px;
+      text-shadow:
+        -3px -3px 0 black,
+        3px -3px 0 black,
+        -3px 3px 0 black,
+        3px 3px 0 black,
+        0 -3px 0 black,
+        0 3px 0 black,
+        -3px 0 0 black,
+        3px 0 0 black;
     }
     #timer {
       font-size: 2rem; /* 36px */
@@ -46,15 +47,8 @@
       font-size: 1.2rem; /* 22px */
       margin-top: 20px;
       color: white;
-      text-shadow:
-        -2px -2px 0 black,
-        2px -2px 0 black,
-        -2px 2px 0 black,
-        2px 2px 0 black,
-        0 -2px 0 black,
-        0 2px 0 black,
-        -2px 0 0 black,
-        2px 0 0 black;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
     }
     button {
       padding: 12px 25px;
@@ -64,15 +58,8 @@
       border-radius: 8px;
       cursor: pointer;
       color: white;
-      text-shadow:
-        -2px -2px 0 black,
-        2px -2px 0 black,
-        -2px 2px 0 black,
-        2px 2px 0 black,
-        0 -2px 0 black,
-        0 2px 0 black,
-        -2px 0 0 black,
-        2px 0 0 black;
+      -webkit-text-stroke: 1px black;
+      text-stroke: 1px black;
     }
   </style>
 </head>
@@ -110,6 +97,7 @@
     let timer;
     let tijd = 30;
 
+    // Voor foto-rotatie zonder herhaling
     let overgeblevenFotos = [...fotos];
 
     function randomLetter() {
