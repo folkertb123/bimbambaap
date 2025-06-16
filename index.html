@@ -18,6 +18,10 @@
       color: white;
       -webkit-text-stroke: 1px black; /* zwarte omkadering voor tekst */
       text-stroke: 1px black;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background-image 0.5s ease-in-out;
     }
     #letter {
       font-size: 40px;
@@ -51,8 +55,7 @@
     }
   </style>
 </head>
-<!-- Inline achtergrondafbeelding direct in body gezet -->
-<body style="background-image: url('images/image00001.jpeg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<body style="background-image: url('images/image00001.jpeg');">
 
   <div id="letter"></div>
   <div id="categorie"></div>
@@ -71,6 +74,13 @@
       "Iets goedkoper dan 5 euro"
     ];
 
+    // Foto's image00001.jpeg t/m image00037.jpeg
+    const fotos = [];
+    for (let i = 1; i <= 37; i++) {
+      const nummer = i.toString().padStart(5, '0');
+      fotos.push(`images/image${nummer}.jpeg`);
+    }
+
     let beschikbareCategorieën = [...ALLE_CATEGORIEN];
     let huidigSpel = null;
     let spelTeller = 0;
@@ -83,6 +93,11 @@
     function randomLetter() {
       const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       return letters[Math.floor(Math.random() * letters.length)];
+    }
+
+    function randomFoto() {
+      const index = Math.floor(Math.random() * fotos.length);
+      document.body.style.backgroundImage = `url('${fotos[index]}')`;
     }
 
     function startTimer() {
@@ -141,6 +156,10 @@
       }
 
       document.getElementById("categorie").innerText = gekozenCategorie;
+
+      // Nieuwe foto tonen
+      randomFoto();
+
       startTimer();
     }
 
