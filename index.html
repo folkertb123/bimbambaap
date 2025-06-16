@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Woordspel</title>
   <style>
     html, body {
@@ -9,6 +10,7 @@
       padding: 0;
       height: 100%;
       overflow: hidden;
+      font-size: 48px; /* basislettergrootte 48px */
     }
     body {
       font-family: Arial, sans-serif;
@@ -19,38 +21,38 @@
       background-repeat: no-repeat;
       transition: background-image 0.5s ease-in-out;
       color: white;
-      -webkit-text-stroke: 1.2px black; /* nog iets dikkere zwarte omkadering */
-      text-stroke: 1.2px black;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
     }
     #letter {
-      font-size: 48px;  /* groter */
+      font-size: 2.5rem;  /* 2.5 * 48 = 120px */
       margin-bottom: 25px;
     }
     #categorie {
-      font-size: 38px; /* groter */
+      font-size: 2rem; /* 96px */
       margin-bottom: 15px;
     }
     #timer {
-      font-size: 56px; /* groter */
+      font-size: 3rem; /* 144px */
       margin: 30px 0;
     }
     #melding {
-      font-size: 30px; /* groter */
+      font-size: 1.8rem; /* 86.4px */
       margin-top: 25px;
       color: white;
-      -webkit-text-stroke: 1.2px black;
-      text-stroke: 1.2px black;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
     }
     button {
-      padding: 25px 50px; /* groter */
-      font-size: 30px; /* groter */
+      padding: 30px 60px;
+      font-size: 2rem; /* 96px */
       background-color: rgba(0,0,0,0.6);
       border: none;
       border-radius: 8px;
       cursor: pointer;
       color: white;
-      -webkit-text-stroke: 1.2px black;
-      text-stroke: 1.2px black;
+      -webkit-text-stroke: 1.5px black;
+      text-stroke: 1.5px black;
     }
   </style>
 </head>
