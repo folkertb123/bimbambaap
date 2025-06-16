@@ -14,6 +14,7 @@
       font-family: Arial, sans-serif;
       text-align: center;
       padding: 50px;
+      background-color: #222; /* fallback donkere achtergrond */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -94,9 +95,10 @@
       return letters[Math.floor(Math.random() * letters.length)];
     }
 
+    // Aangepaste functie: altijd dezelfde afbeelding voor test
     function randomFoto() {
-      const index = Math.floor(Math.random() * fotos.length);
-      document.body.style.backgroundImage = `url('${fotos[index]}')`;
+      document.body.style.backgroundImage = "url('images/image00001.jpeg')";
+      console.log("Test achtergrondfoto: images/image00001.jpeg");
     }
 
     function startTimer() {
