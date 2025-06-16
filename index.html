@@ -55,7 +55,7 @@
     }
   </style>
 </head>
-<body style="background-image: url('images/image00001.jpeg');">
+<body>
 
   <div id="letter"></div>
   <div id="categorie"></div>
@@ -157,7 +157,7 @@
 
       document.getElementById("categorie").innerText = gekozenCategorie;
 
-      // Nieuwe foto tonen
+      // Nieuwe foto tonen bij elke vraag
       randomFoto();
 
       startTimer();
@@ -166,6 +166,9 @@
     window.onload = () => {
       const letter = randomLetter();
       document.getElementById("letter").innerText = "Beginletter: " + letter;
+
+      // Eerste foto ook random, geen inline style in body!
+      randomFoto();
     };
   </script>
 </body>
