@@ -52,6 +52,29 @@
       -webkit-text-stroke: 1px black;
       text-stroke: 1px black;
     }
+
+    /* Mobiele aanpassingen */
+    @media (max-width: 600px) {
+      body {
+        padding: 20px;
+      }
+      #letter {
+        font-size: 28px;
+      }
+      #categorie {
+        font-size: 22px;
+      }
+      #timer {
+        font-size: 36px;
+      }
+      #melding {
+        font-size: 18px;
+      }
+      button {
+        padding: 20px 40px;
+        font-size: 26px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -95,7 +118,7 @@
 
     function randomFoto() {
       const index = Math.floor(Math.random() * fotos.length);
-      const fotoUrl = `${fotos[index]}?t=${new Date().getTime()}`;  // cache-buster
+      const fotoUrl = `${fotos[index]}?t=${new Date().getTime()}`;
       console.log("Nieuwe achtergrondfoto:", fotoUrl);
       document.body.style.backgroundImage = `url('${fotoUrl}')`;
     }
