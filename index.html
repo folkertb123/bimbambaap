@@ -19,61 +19,38 @@
       background-repeat: no-repeat;
       transition: background-image 0.5s ease-in-out;
       color: white;
-      -webkit-text-stroke: 1px black; /* zwarte omkadering voor tekst */
-      text-stroke: 1px black;
+      -webkit-text-stroke: 1.2px black; /* nog iets dikkere zwarte omkadering */
+      text-stroke: 1.2px black;
     }
     #letter {
-      font-size: 40px;
-      margin-bottom: 20px;
+      font-size: 48px;  /* groter */
+      margin-bottom: 25px;
     }
     #categorie {
-      font-size: 30px;
-      margin-bottom: 10px;
+      font-size: 38px; /* groter */
+      margin-bottom: 15px;
     }
     #timer {
-      font-size: 48px;
-      margin: 20px;
+      font-size: 56px; /* groter */
+      margin: 30px 0;
     }
     #melding {
-      font-size: 24px;
-      margin-top: 20px;
+      font-size: 30px; /* groter */
+      margin-top: 25px;
       color: white;
-      -webkit-text-stroke: 1px black;
-      text-stroke: 1px black;
+      -webkit-text-stroke: 1.2px black;
+      text-stroke: 1.2px black;
     }
     button {
-      padding: 15px 30px;
-      font-size: 20px;
+      padding: 25px 50px; /* groter */
+      font-size: 30px; /* groter */
       background-color: rgba(0,0,0,0.6);
       border: none;
       border-radius: 8px;
       cursor: pointer;
       color: white;
-      -webkit-text-stroke: 1px black;
-      text-stroke: 1px black;
-    }
-
-    /* Mobiele en tablet aanpassingen */
-    @media (max-width: 768px) {
-      body {
-        padding: 20px;
-      }
-      #letter {
-        font-size: 28px;
-      }
-      #categorie {
-        font-size: 22px;
-      }
-      #timer {
-        font-size: 36px;
-      }
-      #melding {
-        font-size: 18px;
-      }
-      button {
-        padding: 20px 40px;
-        font-size: 26px;
-      }
+      -webkit-text-stroke: 1.2px black;
+      text-stroke: 1.2px black;
     }
   </style>
 </head>
@@ -119,7 +96,6 @@
     function randomFoto() {
       const index = Math.floor(Math.random() * fotos.length);
       const fotoUrl = `${fotos[index]}?t=${new Date().getTime()}`;
-      console.log("Nieuwe achtergrondfoto:", fotoUrl);
       document.body.style.backgroundImage = `url('${fotoUrl}')`;
     }
 
