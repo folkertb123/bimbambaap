@@ -137,4 +137,63 @@
         tijd--;
         document.getElementById("timer").innerText = tijd;
         if (tijd <= 0) {
-          clearInterval(timer
+          clearInterval(timer);
+          document.getElementById("melding").innerText = "Je gaat jilla";
+        }
+      }, 1000);
+    }
+
+    function volgendeVraag() {
+      if (eersteVraag) {
+        document.getElementById("letter").innerText = "";
+        eersteVraag = false;
+      }
+
+      let gekozenCategorie;
+
+      if (huidigSpel && spelTeller < 5) {
+        spelTeller++;
+        gekozenCategorie = `${huidigSpel} ${spelTeller}`;
+      } else {
+        huidigSpel = null;
+        spelTeller = 0;
+
+        if (beschikbareCategorieën.length === 0) {
+          beschikbareCategorieën = [...ALLE_CATEGORIEN];
+          if (gratisDubbelPofGebruikt) {
+            beschikbareCategorieën = beschikbareCategorieën.filter(c => c !== "Gratis dubbel pof");
+          }
+        }
+
+        let randomIndex = Math.floor(Math.random() * beschikbareCategorieën.length);
+        let categorie = beschikbareCategorieën[randomIndex];
+        beschikbareCategorieën.splice(randomIndex, 1);
+
+        if (categorie === "Gratis dubbel pof") {
+          gratisDubbelPofGebruikt = true;
+        }
+
+        if (categorie.endsWith("spel")) {
+          huidigSpel = categorie;
+          spelTeller = 1;
+          gekozenCategorie = `${huidigSpel} ${spelTeller}`;
+        } else {
+          gekozenCategorie = categorie;
+        }
+      }
+
+      document.getElementById("categorie").innerText = gekozenCategorie;
+
+      randomFoto();
+
+      startTimer();
+    }
+
+    window.onload = () => {
+      const letter = randomLetter();
+      document.getElementById("letter").innerText = "Beginletter: " + letter;
+      randomFoto();
+    };
+  </script>
+</body>
+</html>
