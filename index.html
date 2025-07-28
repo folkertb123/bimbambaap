@@ -108,8 +108,11 @@
       const nummer = i.toString().padStart(5, '0');
       fotos.push(`images/image${nummer}.jpeg`);
     }
-    // png00001.png (ik neem 1 png, pas aan als je meer hebt)
-    fotos.push("images/png00001.png");
+ // png00001.png t/m png00004.png
+for (let i = 1; i <= 4; i++) {
+  const nummer = i.toString().padStart(5, '0');
+  fotos.push(`images/png${nummer}.png`);
+}
 
     // gif00001.gif t/m gif00003.gif
     for (let i = 1; i <= 3; i++) {
