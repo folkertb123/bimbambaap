@@ -23,7 +23,6 @@
       position: relative;
       min-height: 100vh;
     }
-    /* Gif fullscreen img achter de content */
     #gif-background {
       position: fixed;
       top: 0; left: 0;
@@ -34,7 +33,6 @@
       display: none;
       pointer-events: none;
     }
-
     #letter {
       font-size: 1.6rem;
       margin-bottom: 20px;
@@ -96,29 +94,29 @@
       "Locatie in Leeuwarden", "Gratis dubbel pof",
       "Een spel, geen game", "Iets hoogs", "Iets kleiner dan Timo",
       "Een dorp in Nederland", "Een film of serie", "Een lichaamsdeel",
-      "Iets goedkoper dan 5 euro",
-      "Iets wat Jorritsma bouwt", "Noem iets wat je zegt als je skaf bent", 
+      "Iets goedkoper dan 5 euro", "Iets wat Jorritsma bouwt", 
+      "Noem iets wat je zegt als je skaf bent", 
       "Een Transavia bestemming", "Noem een junk", "Een pokémon", 
-      "Pech je gaat Jilla", "Speel steen papier schaar met de volgende, winnaar dubbel pof, verliezer Jilla", 
-      "Gratis pofje en verander spelrichting", "Gratis pofje en kies nieuwe spelleider", 
-      "Iets duurder dan €10.000", "Een scheldwoord", "Een Peki van Twan", "Iets wat PostNL bezorgt", "Een game"
+      "Pech je gaat Jilla", 
+      "Speel steen papier schaar met de volgende, winnaar dubbel pof, verliezer Jilla", 
+      "Gratis pofje en verander spelrichting", 
+      "Gratis pofje en kies nieuwe spelleider", 
+      "Iets duurder dan €10.000", "Een scheldwoord", "Een Peki van Twan", 
+      "Iets wat PostNL bezorgt", "Een game"
     ];
 
-    // Foto'slijst opbouwen
     const fotos = [];
 
-    // image00001.jpeg t/m image00078.jpeg
     for (let i = 1; i <= 78; i++) {
       const nummer = i.toString().padStart(5, '0');
       fotos.push(`images/image${nummer}.jpeg`);
     }
- // png00001.png t/m png00004.png
-for (let i = 1; i <= 4; i++) {
-  const nummer = i.toString().padStart(5, '0');
-  fotos.push(`images/png${nummer}.png`);
-}
 
-    // gif00001.gif t/m gif00003.gif
+    for (let i = 1; i <= 4; i++) {
+      const nummer = i.toString().padStart(5, '0');
+      fotos.push(`images/png${nummer}.png`);
+    }
+
     for (let i = 1; i <= 3; i++) {
       const nummer = i.toString().padStart(5, '0');
       fotos.push(`images/gif${nummer}.gif`);
@@ -127,7 +125,6 @@ for (let i = 1; i <= 4; i++) {
     let beschikbareCategorieën = [...ALLE_CATEGORIEN];
     let huidigSpel = null;
     let spelTeller = 0;
-    let gratisDubbelPofGebruikt = false;
     let eersteVraag = true;
 
     let timer;
@@ -149,12 +146,10 @@ for (let i = 1; i <= 4; i++) {
       const gifElement = document.getElementById("gif-background");
 
       if (fotoUrl.endsWith('.gif')) {
-        // Toon gif in img en verberg achtergrond
         gifElement.src = fotoUrl;
         gifElement.style.display = "block";
         document.body.style.backgroundImage = "none";
       } else {
-        // Toon normale achtergrond, verberg gif img
         document.body.style.backgroundImage = `url('${fotoUrl}')`;
         gifElement.style.display = "none";
         gifElement.src = "";
@@ -198,18 +193,11 @@ for (let i = 1; i <= 4; i++) {
 
         if (beschikbareCategorieën.length === 0) {
           beschikbareCategorieën = [...ALLE_CATEGORIEN];
-          if (gratisDubbelPofGebruikt) {
-            beschikbareCategorieën = beschikbareCategorieën.filter(c => c !== "Gratis dubbel pof");
-          }
         }
 
         let randomIndex = Math.floor(Math.random() * beschikbareCategorieën.length);
         let categorie = beschikbareCategorieën[randomIndex];
         beschikbareCategorieën.splice(randomIndex, 1);
-
-        if (categorie === "Gratis dubbel pof") {
-          gratisDubbelPofGebruikt = true;
-        }
 
         if (categorie.endsWith("spel")) {
           huidigSpel = categorie;
@@ -223,7 +211,6 @@ for (let i = 1; i <= 4; i++) {
       document.getElementById("categorie").innerText = gekozenCategorie;
 
       randomFoto();
-
       startTimer();
     }
 
